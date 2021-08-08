@@ -7,8 +7,10 @@ const API_KEY = "a0ec0b4fd3e3e3eff8952287564ef9ae";
 
 class App extends React.Component { // Создаем класс App, который унаследует все от React.Component
 
-  gettingWeather = async () => { 
-    const api_url = await fetch(`api.openweathermap.org/data/2.5/weather?q=Kiev,ua&appid=${API_KEY}&units=metric`); // fetch() - позволяет прочитать URL адрес и получить с него данные
+  gettingWeather = async (e) => { 
+    e.preventDefault(); // Переменная 'e' служит для отслеживания различных событий // Уничтожаем поведение страницы по умолчанию (убираем перезагрузку стриницы при нажатиии на кнопку)
+    const city = e.target.elements.city.value; // Обращаемся к e . обращаемся к объекту Form .  обращаемся ко всем элементам Form . обращаемся к конкретному св-ву по его имени . берем его значение 
+    const api_url = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`); // fetch() - позволяет прочитать URL адрес и получить с него данные
     const data = await api_url.json(); // Преобразуем полученные данные в json формат
     console.log(data);
   }
@@ -17,7 +19,7 @@ class App extends React.Component { // Создаем класс App, котор
     return(
       <div>
         <Info />
-        <Form />
+        <Form weatherMethod = {this.gettingWeather} />
         <Weather />
       </div>
     );
