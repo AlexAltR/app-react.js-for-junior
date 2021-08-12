@@ -41,7 +41,16 @@ class App extends React.Component { // Создаем класс App, котор
         country: data.sys.country,
         sunrise: sunrise_date,
         sunset: sunset_date,
-        error: ""
+        error: undefined
+      })
+    } else{
+      this.setState({ // Устанавливаем значение свойствам объекта, который находится в этом классе
+        temp: undefined,
+        city: undefined,
+        country: undefined,
+        sunrise: undefined,
+        sunset: undefined,
+        error: "Введите название города"
       })
     }
     
